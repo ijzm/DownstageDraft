@@ -76,12 +76,19 @@ function timer(){
 		document.getElementsByClassName("startstop")[0].innerHTML = "Counter-Terrorists Win!";
 		clearInterval(interval);
 		ctwinsound.play();
+		running = false;
+		isplanted = false;
+		bombcolor();
 	}
 	if(Xbombtime <= 0){
 		document.getElementsByClassName("startstop")[0].innerHTML = "Terrorists Win!";
 		clearInterval(interval);
 		explotion.play();
 		twinsound.play();
+		running = false;
+		isplanted = false;
+		bombcolor();
+		
 	}
 }
 
@@ -139,25 +146,5 @@ function w3_close() {
     document.getElementsByClassName("w3-sidenav")[0].style.display = "none";
 }
 
-/*
-function holdit(btn, action, start, speedup) {
-    var t;
 
-    var repeat = function () {
-        action();
-        t = setTimeout(repeat, start);
-        start = start / speedup;
-    }
-
-    btn.mousedown = function() {
-        repeat();
-    }
-
-    btn.mouseup = function () {
-        clearTimeout(t);
-    }
-};
-
-/* to use */
-//holdit(btn, function () { }, 1000, 2);
 
