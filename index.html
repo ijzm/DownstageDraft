@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<script src="index.js"></script>
+	<link rel="stylesheet" href="w3.css">
+	
+	<header class="w3-container w3-teal">
+  		<span class="w3-opennav w3-xlarge" onclick="w3_open()">&#9776;</span>
+  		<h1 class="startstop" onclick="starttimer()">Start Bomb Timer</h1>
+	</header>
+	<nav class="w3-sidenav w3-white w3-card-2" style="display:none">
+	  <a href="javascript:void(0)" onclick="w3_close()" 
+	  class="w3-closenav w3-large">Close &times;</a>
+	  <a href="#" onclick="changeroundtime()">Round Time</a>		
+	  <a href="#" onclick="changebombtime()">Bomb Time</a>		
+	  <a href="#" onclick="changeplanttime()">Plant Time</a>		
+	  <a href="#" onclick="changedefusetime()">Defuse Time</a>			
+	</nav>
+	<center>
+		
+		<h1 class="timertext">
+		00
+		</h1>
+	
+	</center>
+
+</html>
