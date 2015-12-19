@@ -9,9 +9,13 @@ var interval;
 var Xroundtime;
 var Xbombtime;
 
+var isbombcolor = false;
+
 var ctwinsound = new Audio("assets/sound/ctwin.wav");
 var twinsound = new Audio("assets/sound/twin.wav");
 var bombplant = new Audio("assets/sound/bombplant.wav");
+var beep = new Audio("assets/sound/beep.wav");
+var explotion = new Audio("assets/sound/explotion.wav");
 
 function starttimer() {
 	if(running === false){
@@ -35,6 +39,39 @@ function starttimer() {
 	}
 }
 
+function bomb(){
+	if(running === true){
+		if(isplanted === false){
+			bombplant.play();
+			isplanted = true;
+		}
+	}
+}
+
+function timer(){
+	if (isplanted === false){
+		Xroundtime--;
+		document.getElementsByClassName("timertext")[0].innerHTML = Xroundtime;
+	} else if(isplanted === true){
+		Xbombtime--;
+		document.getElementsByClassName("timertext")[0].innerHTML = Xbombtime;
+		beep.play();
+		bombcolor();
+	}
+	
+	if(Xroundtime <= 0){
+		document.getElementsByClassName("startstop")[0].innerHTML = "Counter-Terrorists Win!";
+		clearInterval(interval);
+		ctwinsound.play();
+	}
+	if(Xbombtime <= 0){
+		document.getElementsByClassName("startstop")[0].innerHTML = "Terrorists Win!";
+		clearInterval(interval);
+		explotion.play();
+		twinsound.play();
+	}
+}
+
 function changeroundtime(){
 	roundtime =  prompt("Change Round Time (in seconds):");
 	if(isNaN(roundtime)){
@@ -43,16 +80,38 @@ function changeroundtime(){
 	
 }
 
-function timer(){
-	if (isplanted === false){
-		Xroundtime--;
-		document.getElementsByClassName("timertext")[0].innerHTML = Xroundtime;
+function changebombtime(){
+	bombtime =  prompt("Change Bomb Time (in seconds):");
+	if(isNaN(roundtime)){
+		changebombtime();
 	}
 	
-	if(Xroundtime <= 0){
-		document.getElementsByClassName("startstop")[0].innerHTML = "Counter-Terrorists Win!";
-		clearInterval(interval);
-		ctwinsound.play();
+}
+
+function changeplanttime(){
+	planttime =  prompt("Change Plant Time (in seconds):");
+	if(isNaN(roundtime)){
+		changeplanttime();
+	}
+	
+}
+
+function changedefusetime(){
+	defusetime =  prompt("Change Defuse Time (in seconds):");
+	if(isNaN(roundtime)){
+		changedefusetime();
+	}
+	
+}
+
+function bombcolor() {
+	if(isbombcolor === true){
+		document.getElementsByClassName("html")[0].style.backgroundColor = "orange";
+		isbombcolor = false;
+	}
+	else if(isbombcolor === false){
+		document.getElementsByClassName("html")[0].style.backgroundColor = "red";
+		isbombcolor = true;
 	}
 }
 
@@ -63,4 +122,25 @@ function w3_close() {
     document.getElementsByClassName("w3-sidenav")[0].style.display = "none";
 }
 
+/*
+function holdit(btn, action, start, speedup) {
+    var t;
+
+    var repeat = function () {
+        action();
+        t = setTimeout(repeat, start);
+        start = start / speedup;
+    }
+
+    btn.mousedown = function() {
+        repeat();
+    }
+
+    btn.mouseup = function () {
+        clearTimeout(t);
+    }
+};
+
+/* to use */
+//holdit(btn, function () { }, 1000, 2);
 
