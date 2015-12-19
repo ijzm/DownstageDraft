@@ -16,6 +16,9 @@ var twinsound = new Audio("assets/sound/twin.wav");
 var bombplant = new Audio("assets/sound/bombplant.wav");
 var beep = new Audio("assets/sound/beep.wav");
 var explotion = new Audio("assets/sound/explotion.wav");
+var defusing = new Audio("assets/sound/defusing.wav");
+var bombdefused = new Audio("assets/sound/bombdefused.wav");
+
 
 function starttimer() {
 	if(running === false){
@@ -44,6 +47,16 @@ function bomb(){
 		if(isplanted === false){
 			bombplant.play();
 			isplanted = true;
+		}
+		else if(isplanted === true){
+			defusing.play();
+			setTimeout(function(){bombdefused.play();}, 1000);
+			setTimeout(function(){ctwinsound.play();}, 2000);
+			document.getElementsByClassName("startstop")[0].innerHTML = "Counter-Terrorists Win!";
+			clearInterval(interval);
+			isplanted = false;
+			running = false;
+			bombcolor();
 		}
 	}
 }
@@ -112,6 +125,10 @@ function bombcolor() {
 	else if(isbombcolor === false){
 		document.getElementsByClassName("html")[0].style.backgroundColor = "red";
 		isbombcolor = true;
+	}
+	
+	if(running === false){
+		document.getElementsByClassName("html")[0].style.backgroundColor = "white";
 	}
 }
 
